@@ -2,7 +2,7 @@
 
 body { font-family: 'Poppins', sans-serif; margin: 0; background: var(--bg); color: white; text-align: center; }
 
-/* Nav */
+/* Navegación */
 .glass-nav { padding: 15px 5%; background: rgba(0,0,0,0.9); border-bottom: 1px solid #333; position: sticky; top: 0; z-index: 100; }
 .nav-content { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; }
 .f-logo { width: 35px; height: 35px; border: 2px solid var(--red); border-radius: 50%; display: flex; justify-content: center; align-items: center; color: var(--red); font-weight: bold; }
@@ -10,7 +10,7 @@ body { font-family: 'Poppins', sans-serif; margin: 0; background: var(--bg); col
 
 .container { max-width: 1100px; margin: 0 auto; padding: 40px 20px; }
 
-/* Login */
+/* Login Card */
 .login-card { background: rgba(255,255,255,0.05); padding: 30px; border-radius: 20px; border: 1px solid #333; max-width: 350px; margin: 0 auto 60px; }
 input, button { width: 100%; padding: 12px; margin: 10px 0; border-radius: 10px; border: none; box-sizing: border-box; }
 input { background: #1a1a1a; color: white; border: 1px solid #444; }
@@ -21,7 +21,7 @@ button:hover { filter: brightness(1.2); }
 .services-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 15px; margin-bottom: 80px; }
 .main-banner { grid-row: span 2; background: var(--red); border-radius: 35px; padding: 40px; text-align: left; display: flex; flex-direction: column; justify-content: center; }
 .f-box { background: white; color: var(--red); width: 25px; height: 25px; text-align: center; border-radius: 4px; font-weight: bold; margin-bottom: 15px; }
-h2 { font-size: 3rem; margin: 0; line-height: 1; }
+h2 { font-size: 3rem; margin: 0; line-height: 1.1; }
 
 .card { background: white; border-radius: 0 35px 0 0; overflow: hidden; height: 210px; cursor: pointer; }
 .c-img { height: 75%; background-size: cover; background-position: center; transition: 0.5s; }
@@ -43,11 +43,10 @@ h2 { font-size: 3rem; margin: 0; line-height: 1; }
 .spinning { animation: spin 0.4s infinite linear; }
 @keyframes spin { 100% { transform: rotate(360deg); } }
 
-/* FOOTER (Diseño de la imagen) */
+/* Footer */
 .main-footer { background: var(--light-gray); color: #333; padding: 60px 5%; text-align: left; }
 .footer-container { display: flex; justify-content: space-between; flex-wrap: wrap; max-width: 1200px; margin: 0 auto; gap: 30px; }
 .footer-col { flex: 1; min-width: 250px; }
-
 .social-row i { background: white; color: var(--red); width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 10px; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
 .f-square-logo { background: var(--red); color: white; width: 85px; height: 85px; border-radius: 15px; font-size: 50px; font-weight: 800; display: flex; align-items: center; justify-content: center; position: relative; margin: 25px 0; }
 .f-square-logo span { font-size: 18px; position: absolute; top: 15px; right: 15px; }
@@ -59,7 +58,7 @@ h2 { font-size: 3rem; margin: 0; line-height: 1; }
 
 .contact-item { display: flex; gap: 15px; margin-top: 20px; align-items: center; }
 .contact-item i { background: var(--red); color: white; padding: 12px; border-radius: 8px; font-size: 18px; }
-.contact-item span { font-weight: 800; color: #111; }
+.contact-item span { font-weight: 800; }
 
 /* Modal */
 .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 200; justify-content: center; align-items: center; }
